@@ -92,7 +92,7 @@ Product.belongsTo(Brand);
 Type.hasMany(Product);
 Product.belongsTo(Type);
 
-Product.hasMany(Property);
+Product.hasMany(Property, {as: 'info'});
 Property.belongsTo(Product);
 
 User.belongsToMany(Product, {through: Selling});
