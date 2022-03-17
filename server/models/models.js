@@ -18,6 +18,7 @@ const User = sequelize.define('user', {
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
     phone: {type: DataTypes.STRING(14), unique: true},
+    roleId: {type: DataTypes.INTEGER, defaultValue: '1'}
 })
 
 const Role = sequelize.define('role', {
