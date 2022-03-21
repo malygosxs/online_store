@@ -1,4 +1,4 @@
-const {User, Role, Purchase, Selling} = require('../models/models')
+const {User, Purchase, Selling} = require('../models/models')
 const ApiError = require('../errors/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -23,8 +23,7 @@ class UserController {
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({email, roleId, password: hashPassword})
-        const role = await Role.findOne({where: {id: user.roleId}})
-        const token = generateJwt(user.id, user.email, role.name)
+        const token = generateJwt(user.id, user.email, user.roleId)
         return res.json({token})
     }
 
@@ -38,17 +37,13 @@ class UserController {
         if (!comparePass) {
             return next(ApiError.badRequest('Неверный пароль'))
         }
-        const role = await Role.findOne({where: {id: user.roleId}})
-        const token = generateJwt(user.id, user.email, role.name)
+        const token = generateJwt(user.id, user.email, user.roleId)
         return res.json({token})
     }
 
-    async check(req, res, next) {
-        const {id} = req.query;
-        if (!id) {
-            return next(ApiError.badRequest('нет ид'))
-        }
-        res.json(await User.findOne({where: {id}}));
+    async auth(req, res) {
+        const token = generateJwt(req.user.id, req.user.email, req.user.role)
+        return res.json({token})
     }
 }
 

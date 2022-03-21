@@ -9,21 +9,18 @@ class ProductController {
             const {name, purchaseReturn, brandId, typeId, info} = req.body
             const {image} = req.files
             let filename = uuid.v4() + '.jpg'
-            image.mv(path.resolve(__dirname,'..', 'static', filename))
-            
+            image.mv(path.resolve(__dirname, '..', 'static', filename))
+
             const product = await Product.create({name, purchaseReturn, brandId, typeId, image: filename})
 
-            if(info) {
-                info = JSON.parse(info)
-                info.forEach(i => {
-                    Property.create({
-                        title: i.title,
-                        description: i.description,
-                        productId: product.id
-                    })
-                });
+            if (info) {
+                const property = JSON.parse(info)
+                await Property.create({
+                    title: property.title,
+                    description: property.description,
+                    productId: product.id
+                })
             }
-
             return res.json(product)
         } catch(e) {
             next(ApiError.badRequest(e.message))
@@ -35,7 +32,7 @@ class ProductController {
     }
 
     async getAll(req, res) {
-        const {brandId, typeId, limit, page} = req.query
+        let {brandId, typeId, limit, page} = req.query
         page = page || 1
         limit = limit || 10
         let offset = page * limit - limit
@@ -44,13 +41,13 @@ class ProductController {
             products = await Product.findAndCountAll({limit, offset})
         }
         if (brandId && !typeId) {
-            products = await Product.findAndCountAll({where:{brandId}, limit, offset})
+            products = await Product.findAndCountAll({where: {brandId}, limit, offset})
         }
         if (!brandId && typeId) {
-            products = await Product.findAndCountAll({where:{typeId}, limit, offset})
+            products = await Product.findAndCountAll({where: {typeId}, limit, offset})
         }
         if (brandId && typeId) {
-            products = await Product.findAndCountAll({where:{typeId, brandId}, limit, offset})
+            products = await Product.findAndCountAll({where: {typeId, brandId}, limit, offset})
         }
         return res.json(products)
     }
