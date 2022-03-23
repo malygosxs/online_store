@@ -45,6 +45,17 @@ class UserController {
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})
     }
+
+    async update(req, res) {
+        const {password, surname, name, patronymic, phone, roleId} = req.body
+        const token = req.headers.authorization.split(' ')[1]
+        const id = jwt.verify(token, process.env.SECRET_KEY).id
+        const user = await User.update(
+            {password, surname, name, patronymic, phone, roleId},
+            {where: {id}}
+        )
+        return res.json(user)
+    }
 }
 
 module.exports = new UserController();

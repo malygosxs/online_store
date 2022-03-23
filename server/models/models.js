@@ -26,11 +26,6 @@ const Role = sequelize.define('role', {
     name: {type: DataTypes.STRING},
 })
 
-const Property = sequelize.define('property', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title: {type: DataTypes.STRING},
-    description: {type: DataTypes.STRING}
-})
 
 const Brand = sequelize.define('brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -81,6 +76,12 @@ const Product = sequelize.define('product', {
     purchaseReturn: {type: DataTypes.BOOLEAN},
 })
 
+const Property = sequelize.define('property', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    title: {type: DataTypes.STRING},
+    description: {type: DataTypes.STRING}
+})
+
 User.hasMany(Address);
 Address.belongsTo(User);
 
@@ -93,7 +94,7 @@ Product.belongsTo(Brand);
 Type.hasMany(Product);
 Product.belongsTo(Type);
 
-Product.hasMany(Property, {as: 'info'});
+Product.hasMany(Property, {as: 'info', onDelete: "CASCADE"});
 Property.belongsTo(Product);
 
 User.belongsToMany(Product, {through: Selling});

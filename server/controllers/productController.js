@@ -2,6 +2,7 @@ const {Product, Property} = require('../models/models')
 const ApiError = require('../errors/ApiError')
 const path = require('path')
 const uuid = require('uuid')
+const fs = require('fs')
 
 class ProductController {
     async create(req, res, next) {
@@ -10,32 +11,41 @@ class ProductController {
             const {image} = req.files
             let filename = uuid.v4() + '.jpg'
             image.mv(path.resolve(__dirname, '..', 'static', filename))
-
+            
             const product = await Product.create({name, purchaseReturn, brandId, typeId, image: filename})
 
             if (info) {
                 const property = JSON.parse(info)
-                await Property.create({
-                    title: property.title,
-                    description: property.description,
-                    productId: product.id
-                })
+                property.forEach(i =>
+                    Property.create({
+                        title: i.title,
+                        description: i.description,
+                        productId: product.id
+                    })
+                )
             }
             return res.json(product)
-        } catch(e) {
+        } catch (e) {
             next(ApiError.badRequest(e.message))
         }
     }
 
     async delete(req, res) {
-
+        const {id} = req.params
+        let product = await Product.findOne({where: {id}})
+        if (product) {
+            const image = path.resolve(__dirname, '..', 'static', product.image)
+            fs.unlink(image, (err) => console.log("No image"))
+            product = await Product.destroy({where: {id}})
+        }
+        return res.json(product)
     }
 
     async getAll(req, res) {
         let {brandId, typeId, limit, page} = req.query
         page = page || 1
         limit = limit || 10
-        let offset = page * limit - limit
+        let offset = page * (limit - 1)
         let products;
         if (!brandId && !typeId) {
             products = await Product.findAndCountAll({limit, offset})
