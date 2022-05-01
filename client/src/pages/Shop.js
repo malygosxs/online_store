@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {Container} from "react-bootstrap";
-// import Row from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TypeBar from "../components/TypeBar";
 import BrandBar from "../components/BrandBar";
@@ -28,7 +28,6 @@ const Shop = observer(() => {
     //         product.setTotalCount(data.count)
     //     })
     // }, [product.page, product.selectedType, product.selectedBrand,])
-
     return (
         <Container>
             <div>

@@ -45,7 +45,6 @@ const NavBar = observer(() => {
                 }
             </Container>
         </Navbar>
-
     );
 });
 
