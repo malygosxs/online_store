@@ -1,24 +1,25 @@
-import React, {useContext} from 'react';
-import {observer} from "mobx-react-lite";
-import {Context} from "../index";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
+import React, { useContext } from 'react';
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
+import Nav from "react-bootstrap/Nav";
+import NavItem from "react-bootstrap/NavItem";
 
 const TypeBar = observer(() => {
-    const {device} = useContext(Context)
+    const { product } = useContext(Context)
     return (
-        <ListGroup>
-            {device.types.map(type =>
-                <ListGroup.Item
-                    style={{cursor: 'pointer'}}
-                    active={type.id === device.selectedType.id}
-                    onClick={() => device.setSelectedType(type)}
+        <Nav className="d-flex justify-content-center" style={{ color: 'white', fontSize: "1.5rem" }}>
+            {product.types.map(type =>
+                <NavItem
+                    style={{ cursor: 'pointer' }}
+                    className="ms-4"
+                    active={type.id === product.selectedType.id}
+                    onClick={() => product.setSelectedType(type)}
                     key={type.id}
                 >
                     {type.name}
-                </ListGroup.Item>
+                </NavItem>
             )}
-        </ListGroup>
+        </Nav>
     );
 });
 

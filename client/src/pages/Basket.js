@@ -2,8 +2,8 @@ import React from 'react';
 
 const Basket = () => {
     return (
-        <div>
-            basket
+        <div className="d-flex justify-content-center">
+            BASKET
         </div>
     );
 };
