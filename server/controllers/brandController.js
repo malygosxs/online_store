@@ -9,7 +9,9 @@ class BrandController {
     }
 
     async delete(req, res) {
-
+        const {id} = req.body
+        const brand = await Brand.destroy({where: {id}})
+        return res.json(brand)
     }
 
     async getAll(req, res) {

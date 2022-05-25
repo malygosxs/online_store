@@ -48,15 +48,15 @@ const CreateProduct = observer(({show, onHide}) => {
             onHide={onHide}
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton style={{borderRadius: 0, backgroundColor: "#cb22d1", color: "#000000", borderColor: "#cb22d1"}}>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Добавить товар
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{borderRadius: 0, backgroundColor: "#000000"}}>
                 <Form>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>{product.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-light"}>{product.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {product.types.map(type =>
                                 <Dropdown.Item
@@ -69,7 +69,7 @@ const CreateProduct = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle>{product.selectedBrand.name || "Выберите тип"}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-light"}>{product.selectedBrand.name || "Выберите бренд"}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {product.brands.map(brand =>
                                 <Dropdown.Item
@@ -101,7 +101,7 @@ const CreateProduct = observer(({show, onHide}) => {
                     />
                     <hr/>
                     <Button
-                        variant={"outline-dark"}
+                        variant={"outline-light"}
                         onClick={addInfo}
                     >
                         Добавить новое свойство
@@ -134,7 +134,7 @@ const CreateProduct = observer(({show, onHide}) => {
                     )}
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{borderRadius: 0, backgroundColor: "#000000", borderColor: "#000000"}}>
                 <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
                 <Button variant="outline-success" onClick={addProduct}>Добавить</Button>
             </Modal.Footer>

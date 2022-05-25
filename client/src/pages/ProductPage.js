@@ -1,52 +1,94 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
-import bigStar from '../assets/bigStar.png'
-import {useParams} from 'react-router-dom'
-import {fetchOneProduct} from "../http/productAPI";
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { useParams } from 'react-router-dom'
+import { fetchOneProduct } from "../http/productAPI";
+import SellingList from '../components/offcanvas/SellingList';
+import PurchaseList from '../components/offcanvas/PurchaseList';
+import PriceList from '../components/offcanvas/PriceList';
+import price from "../Styles.css";
 
 const ProductPage = () => {
-    const [product, setProduct] = useState({info: []})
-    const {id} = useParams()
+    const [purchaseVisible, setPurchaseVisible] = useState(false)
+    const [sellingVisible, setSellingVisible] = useState(false)
+    const [allVisible, setAllVisible] = useState(false)
+    const [product, setProduct] = useState({ info: [] })
+    const { id } = useParams()
     useEffect(() => {
         fetchOneProduct(id).then(data => setProduct(data))
-    }, [])
+    }, [id])
 
     return (
         <Container className="mt-3">
-            <Row>
+            <Row className="justify-content-between">
                 <Col md={4}>
-                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + product.img}/>
+                    <h2 style={{ color: "#ffffff", font: "42px roboto" }}>{product.name}</h2>
+                    <Image className="mt-3" fluid src={process.env.REACT_APP_API_URL + product.image} />
+                    {product.info.map((info, index) =>
+                        <Row key={info.id} className="d-flex justify-content-start" style={{ color: "#ffffff", padding: 10 }}>
+                            <div md={4} style={{ font: "16px roboto" }}>
+                                <b>{info.title}</b>: {info.description}
+                            </div>
+                        </Row>
+                    )}
                 </Col>
-                <Col md={4}>
-                    <Row className="d-flex flex-column align-items-center">
-                        <h2>{product.name}</h2>
-                        <div
-                            className="d-flex align-items-center justify-content-center"
-                            style={{background: `url(${bigStar}) no-repeat center center`, width:240, height: 240, backgroundSize: 'cover', fontSize:64}}
+                <Col md={5} className="mt-5 pt-4 mx-auto">
+                    <div style={{ color: "#ffffff", font: "20px roboto" }}>Последняя сделка: </div>
+                    <div className="mt-3">
+                        <Button variant="price">
+                            <b>23000 Купить</b>
+                        </Button>
+                    </div>
+                    <div className="mt-3">
+                        <Button variant="price">
+                            <b>32700 Продать</b>
+                        </Button>
+                    </div>
+                    <div className="mt-3 d-flex justify-content-between">
+                        <Button
+                            variant="outline-light"
+                            style={{ font: "bold 14px roboto", width: 157, height: 57 }}
+                            onClick={() => setSellingVisible(true)}
                         >
-                            {product.rating}
-                        </div>
-                    </Row>
-                </Col>
-                <Col md={4}>
-                    <Card
-                        className="d-flex flex-column align-items-center justify-content-around"
-                        style={{width: 300, height: 300, fontSize: 32, border: '5px solid lightgray'}}
-                    >
-                        <h3>От: {product.price} руб.</h3>
-                        <Button variant={"outline-dark"}>Добавить в корзину</Button>
-                    </Card>
+                            Предложенные цены
+                        </Button>
+                        <Button
+                            className="ms-3"
+                            variant="outline-light"
+                            style={{ font: "bold 14px roboto", width: 157, height: 57 }}
+                            onClick={() => setPurchaseVisible(true)}
+                        >
+                            Спрашиваемые цены
+                        </Button>
+                        <Button
+                            className="ms-3"
+                            variant="outline-light"
+                            style={{ font: "bold 14px roboto", width: 157, height: 57 }}
+                            onClick={() => setAllVisible(true)}
+                        >
+                            Все сделки
+                        </Button>
+                    </div>
+                    <SellingList
+                        show={sellingVisible}
+                        onHide={() => setSellingVisible(false)}
+                        id={id}
+                        name="Предложенные цены"
+                    />
+                    <PurchaseList
+                        show={purchaseVisible}
+                        onHide={() => setPurchaseVisible(false)}
+                        id={id}
+                        name="Спрашиваемые цены"
+                    />
+                    <PriceList
+                        show={allVisible}
+                        onHide={() => setAllVisible(false)}
+                        id={id}
+                        name="Все сделки"
+                    />
                 </Col>
             </Row>
-            <Row className="d-flex flex-column m-3">
-                <h1>Характеристики</h1>
-                {product.info.map((info, index) =>
-                    <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray' : 'transparent', padding: 10}}>
-                        {info.title}: {info.description}
-                    </Row>
-                )}
-            </Row>
-        </Container>
+        </Container >
     );
 };
 

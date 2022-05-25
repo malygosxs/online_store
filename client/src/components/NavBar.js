@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Context } from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE, PROFILE_ROUTE } from "../utils/consts";
 import NavItem from "react-bootstrap/NavItem";
 import Image from "react-bootstrap/Image";
 import logo from '../assets/logo.png'
@@ -23,7 +23,7 @@ const NavBar = observer(() => {
             <Image width={265} height={73} src={logo} onClick={() => navigate(SHOP_ROUTE)} />
         </Navbar>,
         <Navbar className="d-flex justify-content-center" bg="black">
-            <Nav style={{ color: 'white' }}>
+            <Nav style={{ color: 'white', fontSize: "1.7rem" }}>
                 <NavItem
                     onClick={() => navigate(SHOP_ROUTE)}
                 >
@@ -41,12 +41,12 @@ const NavBar = observer(() => {
                             <NavItem
                                 onClick={() => navigate(ADMIN_ROUTE)}
                                 className="ms-4"
-                                style={{ color: "#f82dff" }}
+                                style={{ color: "#cb22d1" }}
                             >
                                 Админ панель
                             </NavItem>,
                             <NavItem
-                                onClick={() => navigate(SHOP_ROUTE)}
+                                onClick={() => navigate(PROFILE_ROUTE)}
                                 className="ms-4"
                             >
                                 Профиль

@@ -8,6 +8,7 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import { login, registration } from "../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+import auth from "../Styles.css";
 
 const Auth = observer(() => {
     const { user } = useContext(Context)
@@ -25,9 +26,9 @@ const Auth = observer(() => {
             } else {
                 data = await registration(email, password);
             }
-            user.setUser(user)
+            user.setUser(data)
             user.setIsAuth(true)
-            navigate.push(SHOP_ROUTE)
+            navigate(SHOP_ROUTE)
         } catch (e) {
             alert(e.response.data.message)
         }
@@ -37,42 +38,50 @@ const Auth = observer(() => {
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
-            style={{ height: window.innerHeight - 54 }}
+            style={{ height: window.innerHeight * 0.861 }}
         >
-            <Card style={{ width: 600 }} className="p-5">
-                <h2 className="m-auto">{isLogin ? 'Авторизация' : "Регистрация"}</h2>
+            <Card style={{
+                width: 600,
+                background: "#000000",
+                borderColor: "#cb22d1",
+                boxShadow: "0 0 5px #cb22d1"
+            }}
+                className="mb-5 p-5">
+                <h2 className="m-auto" style={{ color: "#ffffff" }}>{isLogin ? "Авторизация" : "Регистрация"}</h2>
                 <Form className="d-flex flex-column">
                     <Form.Control
+                        style={{ borderRadius: 40, boxShadow: "0 0 5px #cb22d1" }}
                         className="mt-3"
                         placeholder="Введите ваш email..."
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <Form.Control
+                        style={{ borderRadius: 40, boxShadow: "0 0 5px #cb22d1" }}
                         className="mt-3"
                         placeholder="Введите ваш пароль..."
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
-                    <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
+                    <Row className="d-flex justify-content-between mt-3 pl-3 pr-3" style={{ color: "#ffffff" }}>
                         {isLogin ?
                             <div>
-                                Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                                Нет аккаунта? <NavLink style={{ color: "#cb22d1" }} to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
                             </div>
                             :
                             <div>
-                                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+                                Есть аккаунт? <NavLink style={{ color: "#cb22d1" }} to={LOGIN_ROUTE}>Войдите!</NavLink>
                             </div>
                         }
                         <Button
-                            variant={"outline-success"}
+                            className="mt-1"
+                            variant="auth"
                             onClick={click}
                         >
-                            {isLogin ? 'Войти' : 'Регистрация'}
+                            {isLogin ? "Войти" : "Зарегистрироваться"}
                         </Button>
                     </Row>
-
                 </Form>
             </Card>
         </Container>

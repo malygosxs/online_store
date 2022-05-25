@@ -1,11 +1,11 @@
-const {User, Purchase, Selling} = require('../models/models')
+const {User} = require('../models/models')
 const ApiError = require('../errors/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const generateJwt = (id, email, role) => {
+const generateJwt = (id, email, roleId) => {
     return jwt.sign(
-        {id, email, role}, 
+        {id, email, roleId}, 
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
         )
@@ -42,7 +42,8 @@ class UserController {
     }
 
     async auth(req, res) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.role)
+        const user = await User.findOne({where: {email: req.user.email}})
+        const token = generateJwt(user.id, user.email, user.roleId)
         return res.json({token})
     }
 

@@ -19,21 +19,22 @@ const CreateType = ({show, onHide}) => {
             onHide={onHide}
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton style={{borderRadius: 0, backgroundColor: "#cb22d1", color: "#000000", borderColor: "#cb22d1"}}>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Добавить тип
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{borderRadius: 0, backgroundColor: "#000000"}}>
                 <Form>
                     <Form.Control
                         value={value}
                         onChange={e => setValue(e.target.value)}
+                        style={{borderColor: "#cb22d1"}}
                         placeholder={"Введите название типа"}
                     />
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{borderRadius: 0, backgroundColor: "#000000", borderColor: "#000000"}}>
                 <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
                 <Button variant="outline-success" onClick={addType}>Добавить</Button>
             </Modal.Footer>

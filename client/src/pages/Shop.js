@@ -4,12 +4,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TypeBar from "../components/TypeBar";
 import BrandBar from "../components/BrandBar";
-import MainBar from "../components/MainBar";
 import ProductList from "../components/ProductList";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import { fetchBrands, fetchProducts, fetchTypes } from "../http/productAPI";
 import Pages from "../components/Pages";
+import sneakers from '../assets/sneakers.png'
+import shop_img from "../Styles.css";
 
 const Shop = observer(() => {
     const { product } = useContext(Context)
@@ -28,10 +29,11 @@ const Shop = observer(() => {
             product.setProducts(data.rows)
             product.setTotalCount(data.count)
         })
-    }, [product, product.page, product.selectedType, product.selectedBrand,])
+    }, [product.page, product.selectedType, product.selectedBrand,])
+    
     return (
         [
-            <MainBar />,
+            <div className="shop_img"><img src={sneakers} /></div>,
             <Container>
                 <Row className="mt-2">
                     <TypeBar />

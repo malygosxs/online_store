@@ -14,7 +14,7 @@ const App = observer(() => {
 
     useEffect(() => {
         check().then(data => {
-            user.setUser(true)
+            user.setUser(data)
             user.setIsAuth(true)
         }).finally(() => setLoading(false))
     }, [user])
@@ -25,12 +25,12 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-        <div style={{backgroundColor: "#000000"}}>
-            <NavBar />
-            <AppRouter />
-        </div>
+            <div style={{ backgroundColor: "#000000" }}>
+                <NavBar />
+                <AppRouter />
+            </div>
         </BrowserRouter>
-        
+
     );
 });
 

@@ -9,16 +9,15 @@ const AppRouter = observer(() => {
     const { user } = useContext(Context)
 
     console.log(user)
-    const isAuth = true
     return (
         <Routes>
-            {isAuth && authRoutes.map(({ path, Element }) =>
+            {user.isAuth && authRoutes.map(({ path, Element }) =>
                 <Route key={path} path={path} element={<Element />} exact />
             )}
             {publicRoutes.map(({ path, Element }) =>
                 <Route key={path} path={path} element={<Element />} exact />
             )}
-            <Route path="*" element={<Navigate to="/" />} />
+            {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
     );
 });

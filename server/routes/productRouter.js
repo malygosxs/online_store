@@ -6,6 +6,7 @@ const checkRole = require('../middleware/CheckRoleMiddleware')
 router.post('/', checkRole(2), productController.create)
 router.get('/', productController.getAll)
 router.get('/:id', productController.getOne)
+router.get('/prices/:productId', productController.getPrices)
 router.delete('/:id', checkRole(2), productController.delete)
 
 

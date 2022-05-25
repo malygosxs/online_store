@@ -18,7 +18,7 @@ export default class ProductStore {
             {id: 2, name: "cumpot", image: "", purchaseReturn: true, property: {title: "blue", descripiton: "sneakers"},
             brand: 'Nike', type: 'Кеды'}
         ]
-        this._selectedType = {}
+        this._selectedType = {id: 4}
         this._selectedBrand = {}
         this._page = 1
         this._totalCount = 0
