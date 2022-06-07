@@ -60,12 +60,14 @@ const Purchase = sequelize.define('purchase', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     price: {type: DataTypes.DECIMAL},
     size: {type: DataTypes.STRING(4)},
+    deal: {type: DataTypes.BOOLEAN, defaultValue: false},
 })
 
 const Selling = sequelize.define('selling', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     price: {type: DataTypes.DECIMAL},
     size: {type: DataTypes.STRING(4)},
+    deal: {type: DataTypes.BOOLEAN, defaultValue: false},
 })
 
 const Product = sequelize.define('product', {

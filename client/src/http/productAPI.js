@@ -79,3 +79,8 @@ export const fetchPrices = async (id) => {
     const { data } = await $host.get('api/product/prices/' + id)
     return data
 }
+
+export const fetchDeals = async (id) => {
+    const { data } = await $host.get('api/product/deals/' + id)
+    return data
+}

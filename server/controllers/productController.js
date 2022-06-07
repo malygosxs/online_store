@@ -80,12 +80,28 @@ class ProductController {
             (SELECT
             sellings."price", sellings."createdAt", sellings."size"
             FROM sellings
-            WHERE sellings."productId" = ${productId}
+            WHERE (sellings."productId" = ${productId} AND sellings."deal" = FALSE)
             UNION
             SELECT purchases."price", purchases."createdAt", purchases."size"
             FROM purchases
-            WHERE purchases."productId" = ${productId})
+            WHERE (purchases."productId" = ${productId}) AND purchases."deal" = FALSE)
             ORDER BY "createdAt" DESC;
+        `);
+        return res.json(prices[0])
+    }
+
+    async getDeals(req, res) {
+        const { productId } = req.params
+        const prices = await sequelize.query(`
+            (SELECT
+            sellings."price", sellings."createdAt", sellings."size"
+            FROM sellings
+            WHERE (sellings."productId" = ${productId} AND sellings."deal" = TRUE)
+            UNION
+            SELECT purchases."price", purchases."createdAt", purchases."size"
+            FROM purchases
+            WHERE (purchases."productId" = ${productId}) AND purchases."deal" = TRUE)
+            ORDER BY "createdAt" ASC;
         `);
         return res.json(prices[0])
     }

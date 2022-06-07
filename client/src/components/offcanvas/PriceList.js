@@ -3,26 +3,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { fetchPrices } from "../../http/productAPI";
+// import { fetchPrices } from "../../http/productAPI";
 
-const formatDate = (date) => {
-    var dd = date.getDate();
-    if (dd < 10) dd = '0' + dd;
-
-    var mm = date.getMonth() + 1;
-    if (mm < 10) mm = '0' + mm;
-
-    var yy = date.getFullYear() % 100;
-    if (yy < 10) yy = '0' + yy;
-
-    return dd + '.' + mm + '.' + yy;
-};
-
-const PriceList = ({ show, onHide, id }) => {
-    const [prices, setPrices] = useState([])
-    useEffect(() => {
-        fetchPrices(id).then(data => setPrices(data))
-    }, [id])
+const PriceList = ({ show, onHide, prices }) => {
+    // const [prices, setPrices] = useState([{}])
+    // useEffect(() => {
+    //     fetchPrices(id).then(data => setPrices(data))
+    // }, [id])
 
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
@@ -51,7 +38,7 @@ const PriceList = ({ show, onHide, id }) => {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    {formatDate(new Date(price.createdAt))}
+                                    {new Date(price.createdAt).toLocaleDateString()}
                                 </Col>
                                 <Col>
                                     {price.size}

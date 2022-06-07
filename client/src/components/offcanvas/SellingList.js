@@ -3,26 +3,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { fetchSellingsByProduct } from "../../http/productAPI";
+// import { fetchSellingsByProduct } from "../../http/productAPI";
 
-const formatDate = (date) => {
-    var dd = date.getDate();
-    if (dd < 10) dd = '0' + dd;
-
-    var mm = date.getMonth() + 1;
-    if (mm < 10) mm = '0' + mm;
-
-    var yy = date.getFullYear() % 100;
-    if (yy < 10) yy = '0' + yy;
-
-    return dd + '.' + mm + '.' + yy;
-};
-
-const SellingList = ({ show, onHide, id }) => {
-    const [sellings, setSellings] = useState([])
-    useEffect(() => {
-        fetchSellingsByProduct(id).then(data => setSellings(data))
-    }, [id])
+const SellingList = ({ show, onHide, sellings }) => {
+    // const [sellings, setSellings] = useState([])
+    // useEffect(() => {
+    //     fetchSellingsByProduct(id).then(data => setSellings(data))
+    // }, [id])
 
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
@@ -51,7 +38,7 @@ const SellingList = ({ show, onHide, id }) => {
                         <ListGroup.Item>
                             <Row>
                                 <Col>
-                                    {formatDate(new Date(selling.createdAt))}
+                                    {new Date(selling.createdAt).toLocaleDateString()}
                                 </Col>
                                 <Col>
                                     {selling.size}

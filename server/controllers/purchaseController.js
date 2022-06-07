@@ -22,7 +22,7 @@ class PurchaseController {
 
     async getAllbyProduct(req, res) {
         const { productId } = req.params
-        const purchases = await Purchase.findAll({ where: { productId }, order: [["createdAt", "DESC"]] })
+        const purchases = await Purchase.findAll({ where: { productId, deal: false }, order: [["price", "DESC"]] })
         return res.json(purchases)
     }
 }

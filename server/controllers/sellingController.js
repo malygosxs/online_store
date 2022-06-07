@@ -22,7 +22,7 @@ class SellingController {
 
     async getAllbyProduct(req, res) {
         const { productId } = req.params
-        const sellings = await Selling.findAll({ where: { productId }, order: [["createdAt", "DESC"]] })
+        const sellings = await Selling.findAll({ where: { productId, deal: false }, order: [["price", "ASC"]] })
         return res.json(sellings)
     }
 }
