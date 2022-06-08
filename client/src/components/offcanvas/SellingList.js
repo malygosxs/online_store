@@ -14,28 +14,28 @@ const SellingList = ({ show, onHide, sellings }) => {
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title><b>Предложенные цены</b></Offcanvas.Title>
+                <Offcanvas.Title><b>Offers</b></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Приведенные ниже данные являются глобальными и не включают применимые сборы, рассчитываемые при оформлении заказа.
+                Bottom text.
                 <ListGroup>
                     <ListGroup.Item>
                         <b>
                             <Row>
                                 <Col>
-                                    Дата
+                                    Date
                                 </Col>
                                 <Col>
-                                    Размер
+                                    Size
                                 </Col>
                                 <Col>
-                                    Цена
+                                    Price
                                 </Col>
                             </Row>
                         </b>
                     </ListGroup.Item>
                     {sellings.map(selling =>
-                        <ListGroup.Item>
+                        <ListGroup.Item key={selling.id}>
                             <Row>
                                 <Col>
                                     {new Date(selling.createdAt).toLocaleDateString()}

@@ -14,28 +14,28 @@ const PurchaseList = ({ show, onHide, purchases }) => {
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title><b>Спрашиваемые цены</b></Offcanvas.Title>
+                <Offcanvas.Title><b>Requests</b></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Приведенные ниже данные являются глобальными и не включают применимые сборы, рассчитываемые при оформлении заказа.
+                Bottom text.
                 <ListGroup>
                     <ListGroup.Item>
                         <b>
                             <Row>
                                 <Col>
-                                    Дата
+                                    Date
                                 </Col>
                                 <Col>
-                                    Размер
+                                    Size
                                 </Col>
                                 <Col>
-                                    Цена
+                                    Price
                                 </Col>
                             </Row>
                         </b>
                     </ListGroup.Item>
                     {purchases.map(purchase =>
-                        <ListGroup.Item>
+                        <ListGroup.Item key={purchase.id}>
                             <Row>
                                 <Col>
                                     {new Date(purchase.createdAt).toLocaleDateString()}

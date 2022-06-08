@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { PlaceholderButton } from 'react-bootstrap';
 import { LineChart, XAxis, YAxis, Line, Tooltip, CartesianGrid } from 'recharts'
 
 const Plot = ({ data }) => {

@@ -37,25 +37,6 @@ const Type = sequelize.define('type', {
     name: {type: DataTypes.STRING},
 })
 
-/*const Country = sequelize.define('country', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING},
-})*/
-
-/*const Delivery = sequelize.define('delivery', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING},
-    date: {type: DataTypes.DATE},
-    price: {type: DataTypes.DECIMAL},
-})*/
-
-/*const Model = sequelize.define('model', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.STRING},
-    material: {type: DataTypes.STRING},
-    color: {type: DataTypes.STRING},
-})*/
-
 const Purchase = sequelize.define('purchase', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     price: {type: DataTypes.DECIMAL},

@@ -52,14 +52,14 @@ const Auth = observer(() => {
                     <Form.Control
                         style={{ borderRadius: 40, boxShadow: "0 0 5px #cb22d1" }}
                         className="mt-3"
-                        placeholder="Введите ваш email..."
+                        placeholder="Email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <Form.Control
                         style={{ borderRadius: 40, boxShadow: "0 0 5px #cb22d1" }}
                         className="mt-3"
-                        placeholder="Введите ваш пароль..."
+                        placeholder="Password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         type="password"
@@ -67,11 +67,11 @@ const Auth = observer(() => {
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3" style={{ color: "#ffffff" }}>
                         {isLogin ?
                             <div>
-                                Нет аккаунта? <NavLink style={{ color: "#cb22d1" }} to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+                                New to Sneakers? <NavLink style={{ color: "#cb22d1" }} to={REGISTRATION_ROUTE}>Sign Up!</NavLink>
                             </div>
                             :
                             <div>
-                                Есть аккаунт? <NavLink style={{ color: "#cb22d1" }} to={LOGIN_ROUTE}>Войдите!</NavLink>
+                                Have an account? <NavLink style={{ color: "#cb22d1" }} to={LOGIN_ROUTE}>Log In!</NavLink>
                             </div>
                         }
                         <Button
@@ -79,7 +79,7 @@ const Auth = observer(() => {
                             variant="auth"
                             onClick={click}
                         >
-                            {isLogin ? "Войти" : "Зарегистрироваться"}
+                            {isLogin ? "Log in" : "Sign Up"}
                         </Button>
                     </Row>
                 </Form>

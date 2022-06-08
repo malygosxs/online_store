@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 // import { fetchPrices } from "../../http/productAPI";
 
-const PriceList = ({ show, onHide, prices }) => {
+const PriceList = ({ show, onHide, prices, name }) => {
     // const [prices, setPrices] = useState([{}])
     // useEffect(() => {
     //     fetchPrices(id).then(data => setPrices(data))
@@ -14,28 +14,28 @@ const PriceList = ({ show, onHide, prices }) => {
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title><b>Все сделки</b></Offcanvas.Title>
+                <Offcanvas.Title><b>{name}</b></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Приведенные ниже данные являются глобальными и не включают применимые сборы, рассчитываемые при оформлении заказа.
+                Bottom Text.
                 <ListGroup>
-                    <ListGroup.Item>
+                    <ListGroup.Item key={0}>
                         <b>
                             <Row>
                                 <Col>
-                                    Дата
+                                    Date
                                 </Col>
                                 <Col>
-                                    Размер
+                                    Size
                                 </Col>
                                 <Col>
-                                    Цена
+                                    Price
                                 </Col>
                             </Row>
                         </b>
                     </ListGroup.Item>
                     {prices.map(price =>
-                        <ListGroup.Item>
+                        <ListGroup.Item key={price.id}>
                             <Row>
                                 <Col>
                                     {new Date(price.createdAt).toLocaleDateString()}

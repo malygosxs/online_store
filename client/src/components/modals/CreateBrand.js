@@ -21,7 +21,7 @@ const CreateBrand = ({ show, onHide }) => {
         >
             <Modal.Header closeButton style={{ borderRadius: 0, backgroundColor: "#cb22d1", color: "#000000", borderColor: "#cb22d1" }}>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Добавить бренд
+                    Add brand
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ borderRadius: 0, backgroundColor: "#000000" }}>
@@ -30,7 +30,7 @@ const CreateBrand = ({ show, onHide }) => {
                         value={value}
                         onChange={e => setValue(e.target.value)}
                         style={{ borderColor: "#cb22d1" }}
-                        placeholder={"Введите название бренда"}
+                        placeholder={"Brand name"}
                     />
                 </Form>
             </Modal.Body>
@@ -39,13 +39,13 @@ const CreateBrand = ({ show, onHide }) => {
                     variant="outline-danger"
                     onClick={onHide}
                 >
-                    Закрыть
+                    Cancel
                 </Button>
                 <Button
                     variant="outline-success"
                     onClick={addBrand}
                 >
-                    Добавить
+                    Confirm
                 </Button>
             </Modal.Footer>
         </Modal>

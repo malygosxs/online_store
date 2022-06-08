@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
-import { fetchOneProduct, fetchDeals, fetchPurchasesByProduct, fetchSellingsByProduct, fetchPrices } from "../http/productAPI";
+import { fetchOneProduct, fetchDeals, fetchPurchasesByProduct, fetchSellingsByProduct, fetchPrices } from '../http/productAPI';
 import SellingList from '../components/offcanvas/SellingList';
 import PurchaseList from '../components/offcanvas/PurchaseList';
 import PriceList from '../components/offcanvas/PriceList';
@@ -41,20 +41,20 @@ const ProductPage = () => {
                     )}
                 </Col>
                 <Col md={5} className="mt-5 pt-4 mx-auto">
-                    <div style={{ color: "#ffffff", font: "20px roboto" }}>Последняя сделка: {deals[0].price} руб.</div>
+                    <div style={{ color: "#ffffff", font: "20px roboto" }}>Last deal: {deals[0].price} $</div>
                     <div className="mt-3">
                         <Button variant="price">
                             <Row>
-                                <Col md={10}><b>{sellings[0].price} руб. мин.</b></Col>
-                                <Col><b>Купить</b></Col>
+                                {/* <Col md={10}><b>{sellings[0].price}$ min</b></Col> */}
+                                <Col><b>Purchase</b></Col>
                             </Row>
                         </Button>
                     </div>
                     <div className="mt-3">
                         <Button variant="price">
                             <Row>
-                                <Col md={10}><b>{purchases[0].price} руб. макс.</b></Col>
-                                <Col><b>Продать/Поставить</b></Col>
+                                {/* <Col md={10}><b>{purchases[0].price}$ max</b></Col> */}
+                                <Col><b>Sell/Place</b></Col>
                             </Row>
                         </Button>
                     </div>
@@ -64,7 +64,7 @@ const ProductPage = () => {
                             style={{ font: "bold 14px roboto", width: 157, height: 57 }}
                             onClick={() => setSellingVisible(true)}
                         >
-                            Предложенные цены
+                            Offers
                         </Button>
                         <Button
                             className="ms-3"
@@ -72,7 +72,7 @@ const ProductPage = () => {
                             style={{ font: "bold 14px roboto", width: 157, height: 57 }}
                             onClick={() => setPurchaseVisible(true)}
                         >
-                            Спрашиваемые цены
+                            Requests
                         </Button>
                         <Button
                             className="ms-3"
@@ -80,29 +80,29 @@ const ProductPage = () => {
                             style={{ font: "bold 14px roboto", width: 157, height: 57 }}
                             onClick={() => setAllVisible(true)}
                         >
-                            Все сделки
+                            All Prices
                         </Button>
                     </div>
                 </Col>
             </Row>
             <Plot data={deals} />
-            <SellingList
+            <PriceList
                 show={sellingVisible}
                 onHide={() => setSellingVisible(false)}
-                sellings={sellings}
-                name="Предложенные цены"
+                prices={sellings}
+                name="Offers"
             />
-            <PurchaseList
+            <PriceList
                 show={purchaseVisible}
                 onHide={() => setPurchaseVisible(false)}
-                purchases={purchases}
-                name="Спрашиваемые цены"
+                prices={purchases}
+                name="Requests"
             />
             <PriceList
                 show={allVisible}
                 onHide={() => setAllVisible(false)}
                 prices={prices}
-                name="Все сделки"
+                name="All Prices"
             />
         </Container >
     );

@@ -24,11 +24,11 @@ const NavBar = observer(() => {
         </Navbar>,
         <Navbar className="d-flex justify-content-center" bg="black">
             <Nav style={{ color: 'white', fontSize: "1.7rem" }}>
-                <NavItem
+                {/* <NavItem
                     onClick={() => navigate(SHOP_ROUTE)}
                 >
-                    Блог
-                </NavItem>
+                    Blog
+                </NavItem> */}
                 {
                     user.isAuth ?
                         [
@@ -36,20 +36,20 @@ const NavBar = observer(() => {
                                 onClick={() => navigate(BASKET_ROUTE)}
                                 className="ms-4"
                             >
-                                Корзина
+                                Basket
                             </NavItem>,
                             <NavItem
                                 onClick={() => navigate(ADMIN_ROUTE)}
                                 className="ms-4"
                                 style={{ color: "#cb22d1" }}
                             >
-                                Админ панель
+                                Admin panel
                             </NavItem>,
                             <NavItem
                                 onClick={() => navigate(PROFILE_ROUTE)}
                                 className="ms-4"
                             >
-                                Профиль
+                                Profile
                             </NavItem>,
                             <NavItem
                                 onClick={() => {
@@ -58,7 +58,7 @@ const NavBar = observer(() => {
                                 }}
                                 className="ms-4"
                             >
-                                Выйти
+                                Log Out
                             </NavItem>
                         ]
                         :
@@ -66,7 +66,7 @@ const NavBar = observer(() => {
                             onClick={() => navigate(LOGIN_ROUTE)}
                             className="ms-4"
                         >
-                            Авторизация
+                            Auth
                         </NavItem>
                 }
             </Nav>

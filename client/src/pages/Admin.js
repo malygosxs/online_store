@@ -16,21 +16,21 @@ const Admin = () => {
                 className="mt-4 p-2"
                 onClick={() => setTypeVisible(true)}
             >
-                Добавить тип
+                Add type
             </Button>
             <Button
                 variant={"outline-light"}
                 className="mt-4 p-2"
                 onClick={() => setBrandVisible(true)}
             >
-                Добавить бренд
+                Add brand
             </Button>
             <Button
                 variant={"outline-light"}
                 className="mt-4 p-2"
                 onClick={() => setProductVisible(true)}
             >
-                Добавить товар
+                Add product
             </Button>
             <CreateBrand show={brandVisible} onHide={() => setBrandVisible(false)} />
             <CreateProduct show={productVisible} onHide={() => setProductVisible(false)} />
