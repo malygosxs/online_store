@@ -8,12 +8,25 @@
 
  .btn-auth:hover {
      color: white;
-     box-shadow: 0 0 20px #cb22d1
+     box-shadow: 0 0 20px #cb22d1;
  }
 
  .btn-auth:focus {
-     box-shadow: 0 0 0px #cb22d1
+     box-shadow: 0 0 0px #cb22d1;
  }
+
+
+ .nav_item {
+    color: white;
+    font-family: Roboto;
+    margin-left: 20px;
+    cursor: 'pointer'
+}
+
+.nav_item:hover {
+    color: #cb22d1;
+    text-shadow: 0 0 20px #cb22d1;
+}
 
 
  .btn-price {
@@ -29,11 +42,11 @@
 
  .btn-price:hover {
      color: white;
-     box-shadow: 0 0 10px #cb22d1
+     box-shadow: 0 0 20px #cb22d1;
  }
 
  .btn-price:focus {
-     box-shadow: 0 0 0px #cb22d1
+     box-shadow: 0 0 10px #cb22d1;
  }
 
 

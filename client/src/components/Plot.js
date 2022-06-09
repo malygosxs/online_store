@@ -3,10 +3,10 @@ import { LineChart, XAxis, YAxis, Line, Tooltip, CartesianGrid } from 'recharts'
 
 const Plot = ({ data }) => {
     useEffect(() => { data.forEach(i => { i.createdAt = new Date(i.createdAt).toLocaleString() }) }, [data])
-    function CustomTooltip({ payload, label, active, size }) {
-        if (active) {
+    function CustomTooltip({ payload, label, active }) {
+        if (active && payload[0]) {
             return (
-                <div className="custom-tooltip" style={{ color: "#cb22d1" }}>
+                <div className="custom-tooltip" style={{}}>
                     <p className="price">{`Цена: ${payload[0].value}`}</p>
                     <p className="date">{label}</p>
                     {/* <p className="size">{`Размер: ${size}`}</p> */}
@@ -27,7 +27,18 @@ const Plot = ({ data }) => {
             <CartesianGrid stroke="#ffffff" />
             <XAxis dataKey="createdAt" stroke="#ffffff" />
             <YAxis dataKey="price" stroke="#ffffff" />
-            <Tooltip wrapperStyle={{ height: 128, width: 100, backgroundColor: '#000000' }} content={<CustomTooltip size={4} />} />
+            <Tooltip wrapperStyle={{
+                height: 100,
+                width: 100,
+                color: "#cb22d1",
+                backgroundColor: '#000000',
+                boxShadow: "0 0 10px #cb22d1",
+                borderWidth: 1,
+                borderStyle: "solid",
+                borderColor: "#cb22d1"
+            }}
+                content={<CustomTooltip />}
+            />
             <Line type="linear" dataKey="price" stroke="#cb22d1" strokeWidth={4} activeDot={{ strokeWidth: 4, r: 4 }} />
         </LineChart>
     );

@@ -2,13 +2,15 @@ import React, { useContext } from 'react';
 import { Context } from "../index";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE, PROFILE_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, CART_ROUTE, PROFILE_ROUTE } from "../utils/consts";
 import NavItem from "react-bootstrap/NavItem";
 import Image from "react-bootstrap/Image";
 import logo from '../assets/logo.png'
 import { observer } from "mobx-react-lite";
 //import Container from "react-bootstrap/Container";
 import { useNavigate } from 'react-router-dom'
+import nav_item from "../Styles.css";
+
 const NavBar = observer(() => {
     const { user } = useContext(Context)
     const navigate = useNavigate()
@@ -33,21 +35,20 @@ const NavBar = observer(() => {
                     user.isAuth ?
                         [
                             <NavItem
-                                onClick={() => navigate(BASKET_ROUTE)}
-                                className="ms-4"
+                                onClick={() => navigate(ADMIN_ROUTE)}
+                                className="nav_item"
                             >
-                                Basket
+                                <b>ADMIN PANEL</b>
                             </NavItem>,
                             <NavItem
-                                onClick={() => navigate(ADMIN_ROUTE)}
-                                className="ms-4"
-                                style={{ color: "#cb22d1" }}
+                                onClick={() => navigate(CART_ROUTE)}
+                                className="nav_item"
                             >
-                                Admin panel
+                                <div>Cart</div>
                             </NavItem>,
                             <NavItem
                                 onClick={() => navigate(PROFILE_ROUTE)}
-                                className="ms-4"
+                                className="nav_item"
                             >
                                 Profile
                             </NavItem>,
@@ -56,7 +57,7 @@ const NavBar = observer(() => {
                                     logOut()
                                     navigate(SHOP_ROUTE)
                                 }}
-                                className="ms-4"
+                                className="nav_item"
                             >
                                 Log Out
                             </NavItem>
@@ -64,7 +65,7 @@ const NavBar = observer(() => {
                         :
                         <NavItem
                             onClick={() => navigate(LOGIN_ROUTE)}
-                            className="ms-4"
+                            className="nav_item"
                         >
                             Auth
                         </NavItem>

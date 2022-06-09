@@ -10,9 +10,9 @@ const TypeBar = observer(() => {
         <Nav className="d-flex justify-content-center" style={{ color: 'white', fontSize: "2rem" }}>
             {product.types.map(type =>
                 <NavItem
-                    style={{ cursor: 'pointer', color: type.id === product.selectedType.id ? "#cb22d1" : "#ffffff" }}
-                    className="ms-4"
-                    //active={type.id === product.selectedType.id}
+                    style={{ color: type.id === product.selectedType.id ? "#cb22d1" : "#ffffff" }}
+                    className="nav_item"
+                    active={type.id === product.selectedType.id}
                     onClick={() => product.setSelectedType(type)}
                     key={type.id}
                 >
