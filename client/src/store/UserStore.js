@@ -15,7 +15,7 @@ export default class UserStore {
         this._user = user
     }
     addToCart(item) {
-        this._cart = [...this._cart, item]
+        this._cart.push(item)
     }
     deleteFromCart(index) {
         console.log(index)

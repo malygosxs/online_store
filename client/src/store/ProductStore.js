@@ -14,7 +14,7 @@ export default class ProductStore {
         this._products = [
         ]
         this._selectedType = {id: 1}
-        this._selectedBrand = {name: "Any", id: 0}
+        this._selectedBrand = {}
         this._page = 1
         this._totalCount = 0
         this._limit = 3

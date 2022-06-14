@@ -2,31 +2,30 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 import { fetchOneProduct, fetchDeals, fetchPurchasesByProduct, fetchSellingsByProduct, fetchPrices } from '../http/productAPI';
-// import SellingList from '../components/offcanvas/SellingList';
-// import PurchaseList from '../components/offcanvas/PurchaseList';
-import PriceList from '../components/offcanvas/PriceList';
+import PriceList from '../components/PriceList';
 import Plot from '../components/Plot';
 import { Context } from "../index";
+import { observer } from "mobx-react-lite";
 import price from "../Styles.css";
 
-const ProductPage = () => {
+const ProductPage = observer(() => {
     const { user } = useContext(Context)
     const { id } = useParams()
 
     const [purchaseVisible, setPurchaseVisible] = useState(false)
     const [sellingVisible, setSellingVisible] = useState(false)
-    const [allVisible, setAllVisible] = useState(false)
+    const [priceVisible, setPriceVisible] = useState(false)
 
     const [product, setProduct] = useState({ info: [] })
     const [deals, setDeals] = useState([{}])
-    const [purchases, setPurchases] = useState([{}])
     const [sellings, setSellings] = useState([{}])
+    const [purchases, setPurchases] = useState([{}])
     const [prices, setPrices] = useState([{}])
     useEffect(() => {
         fetchOneProduct(id).then(data => setProduct(data))
         fetchDeals(id).then(data => setDeals(data))
-        fetchPurchasesByProduct(id).then(data => setPurchases(data))
         fetchSellingsByProduct(id).then(data => setSellings(data))
+        fetchPurchasesByProduct(id).then(data => setPurchases(data))
         fetchPrices(id).then(data => setPrices(data))
     }, [id])
 
@@ -45,11 +44,11 @@ const ProductPage = () => {
                     )}
                 </Col>
                 <Col md={5} className="mt-5 pt-4 mx-auto">
-                    <div style={{ color: "#ffffff", font: "20px roboto" }}>Last deal: {deals[0].price} $</div>
+                    <div style={{ color: "#ffffff", font: "20px roboto" }}>{deals[0] ? `Last deal: ${deals[0].price} $` : ''}</div>
                     <div className="mt-3">
                         <Button variant="price" onClick={() => user.addToCart(product)}>
                             <Row>
-                                {/* <Col md={10}><b>{sellings[0].price}$ min</b></Col> */}
+                                <Col md={10}><b>{sellings[0] ? `${sellings[0].price}$ min` : ''}</b></Col>
                                 <Col><b>Purchase</b></Col>
                             </Row>
                         </Button>
@@ -57,7 +56,7 @@ const ProductPage = () => {
                     <div className="mt-3">
                         <Button variant="price">
                             <Row>
-                                {/* <Col md={10}><b>{purchases[0].price}$ max</b></Col> */}
+                                <Col md={10}><b>{purchases[0] ? `${purchases[0].price}$ max` : ''}</b></Col>
                                 <Col><b>Sell/Place</b></Col>
                             </Row>
                         </Button>
@@ -82,7 +81,7 @@ const ProductPage = () => {
                             className="ms-3"
                             variant="outline-light"
                             style={{ font: "bold 14px roboto", width: 157, height: 57 }}
-                            onClick={() => setAllVisible(true)}
+                            onClick={() => setPriceVisible(true)}
                         >
                             All Prices
                         </Button>
@@ -103,13 +102,13 @@ const ProductPage = () => {
                 name="Requests"
             />
             <PriceList
-                show={allVisible}
-                onHide={() => setAllVisible(false)}
+                show={priceVisible}
+                onHide={() => setPriceVisible(false)}
                 prices={prices}
                 name="All Prices"
             />
         </Container >
     );
-};
+});
 
 export default ProductPage;

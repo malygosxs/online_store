@@ -9,7 +9,7 @@ const Plot = ({ data }) => {
                 <div className="custom-tooltip" style={{}}>
                     <p className="price">{`Цена: ${payload[0].value}`}</p>
                     <p className="date">{label}</p>
-                    {/* <p className="size">{`Размер: ${size}`}</p> */}
+                    <p className="size">{`Размер: ${payload[0].payload.size}`}</p>
                 </div>
             );
         }
@@ -28,7 +28,7 @@ const Plot = ({ data }) => {
             <XAxis dataKey="createdAt" stroke="#ffffff" />
             <YAxis dataKey="price" stroke="#ffffff" />
             <Tooltip wrapperStyle={{
-                height: 100,
+                height: 130,
                 width: 100,
                 color: "#cb22d1",
                 backgroundColor: '#000000',

@@ -3,8 +3,8 @@ const ApiError = require('../errors/ApiError')
 
 class PurchaseController {
     async create(req, res) {
-        const { price, date, userId, productId, delivery_price } = req.body
-        const purchase = await Purchase.create({ price, date, userId, productId, delivery_price })
+        const { price, deal, userId, productId } = req.body
+        const purchase = await Purchase.create({ price, deal, userId, productId })
         return res.json(purchase)
     }
 

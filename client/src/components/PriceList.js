@@ -3,23 +3,24 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-// import { fetchSellingsByProduct } from "../../http/productAPI";
+import { observer } from "mobx-react-lite";
+// import { fetchPrices } from "../../http/productAPI";
 
-const SellingList = ({ show, onHide, sellings }) => {
-    // const [sellings, setSellings] = useState([])
+const PriceList = observer(({ show, onHide, prices, name }) => {
+    // const [prices, setPrices] = useState([{}])
     // useEffect(() => {
-    //     fetchSellingsByProduct(id).then(data => setSellings(data))
+    //     fetchPrices(id).then(data => setPrices(data))
     // }, [id])
 
     return (
         <Offcanvas show={show} onHide={onHide} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title><b>Offers</b></Offcanvas.Title>
+                <Offcanvas.Title><b>{name}</b></Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                Bottom text.
+                Bottom Text.
                 <ListGroup>
-                    <ListGroup.Item>
+                    <ListGroup.Item key={0}>
                         <b>
                             <Row>
                                 <Col>
@@ -34,17 +35,17 @@ const SellingList = ({ show, onHide, sellings }) => {
                             </Row>
                         </b>
                     </ListGroup.Item>
-                    {sellings.map(selling =>
-                        <ListGroup.Item key={selling.id}>
+                    {prices.map(price =>
+                        <ListGroup.Item key={price.id}>
                             <Row>
                                 <Col>
-                                    {new Date(selling.createdAt).toLocaleDateString()}
+                                    {new Date(price.createdAt).toLocaleDateString()}
                                 </Col>
                                 <Col>
-                                    {selling.size}
+                                    {price.size}
                                 </Col>
                                 <Col>
-                                    {selling.price}
+                                    {price.price}
                                 </Col>
                             </Row>
                         </ListGroup.Item>
@@ -53,5 +54,5 @@ const SellingList = ({ show, onHide, sellings }) => {
             </Offcanvas.Body>
         </Offcanvas>
     );
-};
-export default SellingList;
+});
+export default PriceList;
