@@ -17,7 +17,7 @@ export default class ProductStore {
         this._selectedBrand = {}
         this._page = 1
         this._totalCount = 0
-        this._limit = 3
+        this._limit = 5
         makeAutoObservable(this)
     }
 
@@ -44,6 +44,9 @@ export default class ProductStore {
     }
     setTotalCount(count) {
         this._totalCount = count
+    }
+    setLimit(limit) {
+        this._limit = limit
     }
 
     get types() {

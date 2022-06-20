@@ -25,7 +25,7 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-            <div style={{ backgroundColor: "#000000" }}>
+            <div style={{ backgroundColor: "#000000",  minHeight: "100vh", margin: "0 auto " }}>
                 <NavBar />
                 <AppRouter />
             </div>

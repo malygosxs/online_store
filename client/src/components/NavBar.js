@@ -7,9 +7,7 @@ import NavItem from "react-bootstrap/NavItem";
 import Image from "react-bootstrap/Image";
 import logo from '../assets/logo.png'
 import { observer } from "mobx-react-lite";
-//import Container from "react-bootstrap/Container";
 import { useNavigate } from 'react-router-dom'
-import nav_item from "../Styles.css";
 
 const NavBar = observer(() => {
     const { user } = useContext(Context)
@@ -34,39 +32,21 @@ const NavBar = observer(() => {
                 {
                     user.isAuth ?
                         [
-                            <NavItem
-                                onClick={() => navigate(ADMIN_ROUTE)}
-                                className="nav_item"
-                            >
-                                <b>ADMIN PANEL</b>
-                            </NavItem>,
-                            <NavItem
-                                onClick={() => navigate(CART_ROUTE)}
-                                className="nav_item"
-                            >
-                                <div>Cart</div>
-                            </NavItem>,
-                            <NavItem
-                                onClick={() => navigate(PROFILE_ROUTE)}
-                                className="nav_item"
-                            >
-                                Profile
-                            </NavItem>,
+                            user.user.roleId === 2 ?
+                                <NavItem onClick={() => navigate(ADMIN_ROUTE)}> <b>ADMIN PANEL</b> </NavItem>
+                                : '',
+                            <NavItem onClick={() => navigate(CART_ROUTE)}> Cart </NavItem>,
+                            <NavItem onClick={() => navigate(PROFILE_ROUTE)}> Profile </NavItem>,
                             <NavItem
                                 onClick={() => {
                                     logOut()
                                     navigate(SHOP_ROUTE)
                                 }}
-                                className="nav_item"
                             >
                                 Log Out
                             </NavItem>
                         ]
-                        :
-                        <NavItem
-                            onClick={() => navigate(LOGIN_ROUTE)}
-                            className="nav_item"
-                        >
+                        : <NavItem onClick={() => navigate(LOGIN_ROUTE)}>
                             Auth
                         </NavItem>
                 }

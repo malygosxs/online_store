@@ -11,7 +11,7 @@ const Admin = observer(() => {
     const [productVisible, setProductVisible] = useState(false)
 
     return (
-        <Container className="d-flex flex-column" style={{ height: window.innerHeight * 0.861 }}>
+        <Container className="d-flex flex-column">
             <Button
                 variant={"outline-light"}
                 className="mt-4 p-2"

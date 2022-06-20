@@ -15,7 +15,6 @@
      box-shadow: 0 0 0px #cb22d1;
  }
 
-
  .btn-price {
      background-color: #cb22d1;
      color: black;
@@ -53,14 +52,81 @@
  }
 
 
-.nav_item {
+.nav-item {
     color: white;
     font-family: Roboto;
     margin-left: 20px;
     cursor: 'pointer'
 }
 
-.nav_item:hover {
+.nav-item:hover {
     color: #cb22d1;
     text-shadow: 0 0 20px #cb22d1;
+}
+
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: black;
+    background-color: #cb22d1;
+    border-color: #cb22d1;
+}
+
+.page-item .page-link {
+    z-index: 3;
+    color: #cb22d1;
+    background-color: black;
+    border-color: #cb22d1;
+}
+
+
+.form-control {
+    border-color: #cb22d1;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 10px #cb22d1;
+    border-color: #cb22d1;
+}
+
+.form-check-input{
+    border-color: #cb22d1;
+}
+
+.form-check-input:checked{
+    background-color: black;
+    border-color: #cb22d1;
+}
+
+.form-check-input:focus{
+    border-color: #cb22d1;
+    box-shadow: 0 0 0px #cb22d1;
+}
+
+
+.modal-header {
+    border-radius: 0;
+    border: none;
+    background-color: #cb22d1;
+    color: black;
+}
+
+.modal-body {
+    border-radius: 0;
+    border: none;
+    background-color: black;
+    color: black;
+}
+
+.modal-footer {
+    border-radius: 0;
+    border: none;
+    background-color: black;
+    color: black;
+}
+
+.modal-content {
+    border-radius: 4px;
+    border-width: 4px;
+    border-color: #cb22d1;
 }

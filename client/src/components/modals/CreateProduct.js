@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Modal from "react-bootstrap/Modal";
-import { Button, Dropdown, Form, Row, Col } from "react-bootstrap";
+import { Button, Dropdown, Form, Row, Col, Alert } from "react-bootstrap";
 import { Context } from "../../index";
 import { createProduct, fetchBrands, fetchProducts, fetchTypes } from "../../http/productAPI";
 import { observer } from "mobx-react-lite";
@@ -8,14 +8,16 @@ import { observer } from "mobx-react-lite";
 const CreateProduct = observer(({ show, onHide }) => {
     const { product } = useContext(Context)
     const [name, setName] = useState('')
-    const [price, setPrice] = useState(0)
+    const [type, setType] = useState({})
+    const [brand, setBrand] = useState({})
+    const [purchaseReturn, setPurchaseReturn] = useState(false)
     const [file, setFile] = useState(null)
     const [info, setInfo] = useState([])
 
     useEffect(() => {
         fetchTypes().then(data => product.setTypes(data))
         fetchBrands().then(data => product.setBrands(data))
-    }, [])
+    }, [product])
 
     const addInfo = () => {
         setInfo([...info, { title: '', description: '', number: Date.now() }])
@@ -34,12 +36,12 @@ const CreateProduct = observer(({ show, onHide }) => {
     const addProduct = () => {
         const formData = new FormData()
         formData.append('name', name)
-        formData.append('price', `${price}`)
-        formData.append('img', file)
-        formData.append('brandId', product.selectedBrand.id)
-        formData.append('typeId', product.selectedType.id)
+        formData.append('purchaseReturn', purchaseReturn)
+        formData.append('image', file)
+        formData.append('brandId', brand.id)
+        formData.append('typeId', type.id)
         formData.append('info', JSON.stringify(info))
-        createProduct(formData).then(data => onHide())
+        createProduct(formData).then(() => {onHide(); return <Alert>Success</Alert>})
     }
 
     return (
@@ -48,19 +50,19 @@ const CreateProduct = observer(({ show, onHide }) => {
             onHide={onHide}
             centered
         >
-            <Modal.Header closeButton style={{ borderRadius: 0, backgroundColor: "#cb22d1", color: "#000000", borderColor: "#cb22d1" }}>
+            <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Add product
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ borderRadius: 0, backgroundColor: "#000000" }}>
+            <Modal.Body>
                 <Form>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle variant={"outline-light"}>{product.selectedType.name || "Выберите тип"}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-light"}>{type.name || "Выберите тип"}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {product.types.map(type =>
                                 <Dropdown.Item
-                                    onClick={() => product.setSelectedType(type)}
+                                    onClick={() => setType(type)}
                                     key={type.id}
                                 >
                                     {type.name}
@@ -69,11 +71,11 @@ const CreateProduct = observer(({ show, onHide }) => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className="mt-2 mb-2">
-                        <Dropdown.Toggle variant={"outline-light"}>{product.selectedBrand.name || "Выберите бренд"}</Dropdown.Toggle>
+                        <Dropdown.Toggle variant={"outline-light"}>{brand.name || "Выберите бренд"}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {product.brands.map(brand =>
                                 <Dropdown.Item
-                                    onClick={() => product.setSelectedBrand(brand)}
+                                    onClick={() => setBrand(brand)}
                                     key={brand.id}
                                 >
                                     {brand.name}
@@ -85,14 +87,15 @@ const CreateProduct = observer(({ show, onHide }) => {
                         value={name}
                         onChange={e => setName(e.target.value)}
                         className="mt-3"
-                        placeholder="Name"
+                        placeholder="Product name"
                     />
-                    <Form.Control
-                        value={price}
-                        onChange={e => setPrice(Number(e.target.value))}
+                    <Form.Check
+                        style={{color: "white"}}
+                        type="checkbox"
+                        value={purchaseReturn}
+                        onChange={e => setPurchaseReturn(e.target.value)}
                         className="mt-3"
-                        placeholder="Price"
-                        type="number"
+                        label="Returnable?"
                     />
                     <Form.Control
                         className="mt-3"
@@ -134,7 +137,7 @@ const CreateProduct = observer(({ show, onHide }) => {
                     )}
                 </Form>
             </Modal.Body>
-            <Modal.Footer style={{ borderRadius: 0, backgroundColor: "#000000", borderColor: "#000000" }}>
+            <Modal.Footer>
                 <Button
                     variant="outline-danger"
                     onClick={onHide}

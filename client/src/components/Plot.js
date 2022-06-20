@@ -18,6 +18,7 @@ const Plot = ({ data }) => {
     }
 
     return (
+        data.length ?
         <LineChart
             width={1250}
             height={500}
@@ -41,6 +42,7 @@ const Plot = ({ data }) => {
             />
             <Line type="linear" dataKey="price" stroke="#cb22d1" strokeWidth={4} activeDot={{ strokeWidth: 4, r: 4 }} />
         </LineChart>
+        : <div className="mt-5 d-flex justify-content-center" style={{ color: "#cb22d1", fontSize: "25px", fontFamily: "Roboto" }}>No deals data</div>
     );
 };
 export default Plot;
