@@ -33,7 +33,7 @@ const Shop = observer(() => {
 
     return (
         [
-            <div className="shop_img"><img src={sneakers} /></div>,
+            <div className="shop_img"><img src={sneakers} alt="sneakers"/></div>,
             <Container style={{ minHeight: "40vh" }}>
                 <Row className="mt-2">
                     <TypeBar />

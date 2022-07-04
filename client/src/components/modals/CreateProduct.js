@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Modal from "react-bootstrap/Modal";
 import { Button, Dropdown, Form, Row, Col, Alert } from "react-bootstrap";
 import { Context } from "../../index";
-import { createProduct, fetchBrands, fetchProducts, fetchTypes } from "../../http/productAPI";
+import { createProduct, fetchBrands, fetchTypes } from "../../http/productAPI";
 import { observer } from "mobx-react-lite";
 
 const CreateProduct = observer(({ show, onHide }) => {
